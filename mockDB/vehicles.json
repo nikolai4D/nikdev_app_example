@@ -1,0 +1,22 @@
+{
+  "vehicles": [
+    {
+      "id": 1,
+      "owner": 1,
+      "color": "blue",
+      "year": 1998
+    },
+    {
+      "id": 2,
+      "owner": 1,
+      "color": "red",
+      "year": 1997
+    },
+    {
+      "id": 3,
+      "owner": 2,
+      "color": "yellow",
+      "year": 1998
+    }
+  ]
+}
