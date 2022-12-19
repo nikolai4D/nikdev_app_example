@@ -1,0 +1,40 @@
+{
+  "name": "nikdevtemplateapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "debug": "^4.3.4",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nd_frontend": "github:nikolai4D/frontEndFramework",
+    "nodemon": "^2.0.20",
+    "vite": "^4.0.0"
+  },
+  "description": "A starting point for Nikdev applications.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikolai4D/Nikdev-Template-App.git"
+  },
+  "keywords": [
+    "spa",
+    "nikdev",
+    "single",
+    "page",
+    "application",
+    "express",
+    "framework"
+  ],
+  "author": "Nikdev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikolai4D/Nikdev-Template-App/issues"
+  },
+  "homepage": "https://github.com/nikolai4D/Nikdev-Template-App#readme"
+}
