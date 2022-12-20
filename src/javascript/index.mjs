@@ -9,7 +9,7 @@ import {loggedInGuard} from "./frontend/guards/loggedInGuard.mjs";
 
 export const router = new Router([
     route("login", Login),
-    route("dashboard", Dashboard, loggedInGuard),
+    route("dashboard", Dashboard/*, loggedInGuard*/),
     route("user", User)
 ])
 

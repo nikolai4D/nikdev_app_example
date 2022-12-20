@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fs = require("fs");
 const bodyParser = require("express");
+const { getAllUsers } = require("./api/users");
 
 
 const app = express();
@@ -21,6 +22,13 @@ app.get("/vehicles", (req, res) => {
     res.json(vehiclesFile.vehicles)
 })
 
+
+app.get("/users", async (req, res) => {
+    console.log("users route")
+
+    const users = await getAllUsers()
+    res.json(users)
+})
 
 app.post("/login", (req, res) => {
     console.log("login route")

@@ -1,9 +1,7 @@
-export default async function (query) {
-
-    const cosURL = process.env.COS_API_URL
+async function graphQLQuery (query) {
     let response
     try {
-        response = await fetch(`/api/graphql`, {
+        response = await fetch(process.env.COS_API_URL + `/graphql`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -16,3 +14,5 @@ export default async function (query) {
     return await response.json()
 
 }
+
+module.exports = graphQLQuery

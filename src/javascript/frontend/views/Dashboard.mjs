@@ -6,6 +6,7 @@ import {getAllVehicles} from "../../actions/vehicles.mjs";
 import {f_NavBar} from "../../factories/f_NavBar.mjs";
 import Button from "nd_frontend/framework/generics/frontend/atoms/Button.mjs";
 import {router} from "../../index.mjs";
+import fetchUsers from "../../actions/fetchUsers.mjs";
 
 export function Dashboard() {
     View.call(this)
@@ -19,6 +20,10 @@ export function Dashboard() {
     this.button = new Button("Go To User Page", async () => { await router.goTo("user") })
 
     this.loadData = async function () {
+
+        this.users = await fetchUsers()
+
+        console.log("users: ", this.users)
         this.vehicles = await getAllVehicles()
         this.table.headers = ["id", "owner", "color", "year"]
         this.table.rows = this.vehicles.map(vehicle => [vehicle.id, vehicle.owner, vehicle.color, vehicle.year])
