@@ -6,7 +6,8 @@ import {getAllVehicles} from "../../actions/vehicles.mjs";
 import {f_NavBar} from "../../factories/f_NavBar.mjs";
 import Button from "nd_frontend/framework/generics/frontend/atoms/Button.mjs";
 import {router} from "../../index.mjs";
-import userTable from "../../factories/userTable.mjs";
+import usersTable from "../../factories/userTable.mjs";
+import fetchUsers from "../../actions/fetchUsers.mjs";
 
 export function Dashboard() {
     View.call(this)
@@ -16,13 +17,27 @@ export function Dashboard() {
     this.navBar = f_NavBar()
     this.header = new Header(1,"Dashboard")
 
-    this.usersTable =  null
+    this.usersTable =  new Table()
     this.vehicleTable = new Table()
 
     this.button = new Button("Go To User Page", async () => { await router.goTo("user") })
 
     this.loadData = async function () {
-        this.usersTable = await userTable()
+        const users = (await fetchUsers()).data.nodes
+
+        console.log("users: ", JSON.stringify(users, null, 2))
+        this.usersTable.headers = ["name", "email", "color", "year"]
+        this.usersTable.rows = users.map(user => {
+            const row = []
+            row.push(user.title)
+            for (let rel of user.relationships) {
+                row.push(rel.sourceNode.title)
+            }
+
+            if(row.length > 4 ) row.length = 4
+            console.log("row: ", row)
+            return row
+        })
 
         this.vehicles = await getAllVehicles()
         this.vehicleTable.headers = ["name", "email", "color", "year"]
