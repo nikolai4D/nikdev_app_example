@@ -3,6 +3,7 @@ import {router} from "../../index.mjs";
 import {View} from "nd_frontend/core/View.mjs";
 import {Header} from "nd_frontend/generics/components/atoms/Header.mjs";
 import {Default} from "nd_frontend/generics/components/templates/Default.mjs";
+import {Button} from "nd_frontend/generics/components/atoms/Button.mjs"
 
 export function User() {
     View.call(this)

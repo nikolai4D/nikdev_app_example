@@ -12,20 +12,46 @@ export default async function usersTable(table) {
     }
 
     table.headers = ["name", "age", "country", "checklists"]
-    table.rows = users.map(user => {
-        const userData = extractUserData(user)
-        const row = []
-        row.push(userData.name, userData.age, userData.country, userData.checklists.join(",<br>"))
-        return row
-    })
+    table.rows = setRows(users, table)
 
     table.clickHandler = userTableClickHandler
+    table.data = users
+    table.sortPerHeader = sortPerHeader
 
     return table
 }
 
-function userTableClickHandler(event) {
-    const   table = this
+async function userTableClickHandler(event) {
 
-   console.log("coords: " + JSON.stringify(getCellCoords(event), null, 2))
+    const coords = getCellCoords(event)
+    console.log(coords)
+    if (coords[1] === 0) {
+        this.sortPerHeader(coords[0])
+    }
+
+    this.rows = setRows(this.data, this)
+
+    const oldTable = this.element
+    this.element = null
+    oldTable.replaceWith(this.getElement())
+}
+
+function sortPerHeader(x){
+    const clickedHeader = this.headers.splice(x,1)
+    this.headers.push(clickedHeader)
+}
+
+function setRows(data, table){
+
+    return data.map(user => {
+        const userData = extractUserData(user)
+        const row = []
+
+        for (let i of table.headers){
+            if(typeof i === "Array") userData[i].join(",<br>")
+            else row.push(userData[i])
+        }
+
+        return row
+    })
 }
