@@ -5,4 +5,6 @@ export default async function () {
             "Content-Type": "application/json",
         }
     })
+
+    return await resp.json()
 }

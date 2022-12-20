@@ -1,39 +1,38 @@
+const {apiCallPost} = require('./helpers')
+const axios = require("axios");
+
 async function getAllUsers() {
-    const query = JSON.stringify({
-        query: `query {
-  nodes {
-    id
-    title
-    updated
-    created
-  }
-  variables: {
-    parentId: "co_19c2f22d-a0c3-472d-84ef-f84ecb631d6c"
-  }
-}`
-    })
-
-    const resp = await graphQLQuery(query)
-    return resp.data.nodes
-}
-
-async function getChecklistRelatedToUser(username){
-    const query = JSON.stringify({
-        query: `query {
-  users {
-    id
-    email
-    name
-    password
-    updated
-    created
-  }
-  variables: {
-    title: "${username}"
+    const query = {
+        query: `query RooterQueryType($input:QueryInput){
+            nodes(itemInput:$input){
+                id
+                title
+                updated
+                created
+                relationships {
+                    id
+                    sourceId
+                    sourceNode {
+                        id
+                        title
+                    }
+                 }
+            }
+        }`,
+        variables: {
+            input: {
+                parentId: "co_19c2f22d-a0c3-472d-84ef-f84ecb631d6c"
+            }
+        }
     }
-}`
-    })
-    return graphQLQuery(query)
+
+    let response
+
+
+    response = await apiCallPost(query, "/api/graphql")
+    return response.data
+
 }
 
-module.exports = { getAllUsers, getChecklistRelatedToUser }
+
+module.exports = { getAllUsers }
