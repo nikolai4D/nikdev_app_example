@@ -1,9 +1,8 @@
-import {Router} from "nd_frontend/framework/core/Router.mjs";
-import {route} from "nd_frontend/framework/core/Router.mjs"
 import {Login} from "./frontend/views/Login.mjs";
 import {Dashboard} from "./frontend/views/Dashboard.mjs";
 import {User} from "./frontend/views/User.js";
 import {loggedInGuard} from "./frontend/guards/loggedInGuard.mjs";
+import {route, Router} from "nd_frontend/core/Router.mjs";
 
 
 

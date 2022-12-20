@@ -1,6 +1,6 @@
-import {Guard} from "nd_frontend/framework/core/Guard.mjs";
 import {state} from "../../store/state.js";
 import {router} from "../../index.mjs";
+import {Guard} from "nd_frontend/core/Guard.mjs";
 
 
 /**

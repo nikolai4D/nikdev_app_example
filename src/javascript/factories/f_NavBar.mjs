@@ -1,5 +1,5 @@
-import {NavBar} from "nd_frontend/framework/generics/frontend/organisms/NavBar.mjs";
 import {router} from "../index.mjs";
+import {NavBar} from "nd_frontend/generics/components/organisms/NavBar.mjs";
 
 export function f_NavBar() {
 

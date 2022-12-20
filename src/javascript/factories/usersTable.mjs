@@ -1,5 +1,6 @@
 import fetchUsers from "../actions/fetchUsers.mjs";
 import {extractUserData} from "../ETL/extractUserData.mjs";
+import {getCellCoords} from "nd_frontend/generics/helpers.mjs";
 
 export default async function usersTable(table) {
 
@@ -14,9 +15,17 @@ export default async function usersTable(table) {
     table.rows = users.map(user => {
         const userData = extractUserData(user)
         const row = []
-        row.push(userData.name, userData.age, userData.country, userData.checklists)
+        row.push(userData.name, userData.age, userData.country, userData.checklists.join(",<br>"))
         return row
     })
 
+    table.clickHandler = userTableClickHandler
+
     return table
+}
+
+function userTableClickHandler(event) {
+    const   table = this
+
+   console.log("coords: " + JSON.stringify(getCellCoords(event), null, 2))
 }
