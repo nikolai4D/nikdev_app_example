@@ -1,0 +1,1 @@
+This folder hold the ui components. It should be data agnostic.

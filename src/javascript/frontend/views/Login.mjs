@@ -1,9 +1,9 @@
 import {View} from "nd_frontend/framework/core/View.mjs";
 import {Default} from "nd_frontend/framework/generics/frontend/templates/Default.mjs";
 import {LoginForm} from "nd_frontend/framework/generics/frontend/organisms/LoginForm.mjs";
-import {login} from "../actions/authentication.mjs";
-import {state} from "../store/state.js";
-import {router} from "../index.mjs";
+import {login} from "../../actions/authentication.mjs";
+import {state} from "../../store/state.js";
+import {router} from "../../index.mjs";
 
 export function Login() {
     View.call(this)
