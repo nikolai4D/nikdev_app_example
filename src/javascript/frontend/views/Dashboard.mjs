@@ -6,38 +6,27 @@ import {getAllVehicles} from "../../actions/vehicles.mjs";
 import {f_NavBar} from "../../factories/f_NavBar.mjs";
 import Button from "nd_frontend/framework/generics/frontend/atoms/Button.mjs";
 import {router} from "../../index.mjs";
-import usersTable from "../../factories/userTable.mjs";
-import fetchUsers from "../../actions/fetchUsers.mjs";
+import usersTable from "../../factories/usersTable.mjs";
 
 export function Dashboard() {
     View.call(this)
 
+    // This property is used to set the title of the page
     this.title = "Dashboard"
 
+    // These are the components that will be rendered in the view. Keeping a reference to them can be convenient but is not mandatory.
     this.navBar = f_NavBar()
     this.header = new Header(1,"Dashboard")
-
-    this.usersTable =  new Table()
+    this.usersTable = new Table()
     this.vehicleTable = new Table()
-
     this.button = new Button("Go To User Page", async () => { await router.goTo("user") })
 
+    /*
+    * This method is called when the view is rendered. It is used to set the asynchronous content of the view.
+     */
     this.loadData = async function () {
-        const users = (await fetchUsers()).data.nodes
 
-        console.log("users: ", JSON.stringify(users, null, 2))
-        this.usersTable.headers = ["name", "email", "color", "year"]
-        this.usersTable.rows = users.map(user => {
-            const row = []
-            row.push(user.title)
-            for (let rel of user.relationships) {
-                row.push(rel.sourceNode.title)
-            }
-
-            if(row.length > 4 ) row.length = 4
-            console.log("row: ", row)
-            return row
-        })
+        await usersTable(this.usersTable) // Populate with asynchronous data
 
         this.vehicles = await getAllVehicles()
         this.vehicleTable.headers = ["name", "email", "color", "year"]

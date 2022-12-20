@@ -13,7 +13,7 @@ async function getAllUsers() {
                     id
                     sourceId
                     sourceNode {
-                        id
+                        parentId
                         title
                     }
                  }
