@@ -48,7 +48,11 @@ function setRows(data, table){
         const row = []
 
         for (let i of table.headers){
-            if(typeof i === "Array") userData[i].join(",<br>")
+            if(Array.isArray(userData[i])) {
+
+                row.push(userData[i].join(",<br>"))
+
+            }
             else row.push(userData[i])
         }
 
