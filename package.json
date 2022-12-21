@@ -1,5 +1,5 @@
 {
-  "name": "nikdevtemplateapp",
+  "name": "nikdev_example_app",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -19,7 +19,7 @@
     "nodemon": "^2.0.20",
     "vite": "^4.0.0"
   },
-  "description": "A starting point for Nikdev applications.",
+  "description": "A project that implement the nikdev ways of coding, from the frontend component practice to the contechOS api.",
   "main": "app.js",
   "keywords": [
     "spa",
