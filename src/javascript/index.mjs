@@ -10,7 +10,7 @@ import {Vehicles} from "./frontend/views/Vehicles.mjs";
 export const router = new Router([
     route("vehicles", Vehicles),
     route("login", Login),
-    route("dashboard", Dashboard/*, loggedInGuard*/),
+    route("dashboard", Dashboard, loggedInGuard),
     route("user", User)
 ])
 
