@@ -15,16 +15,12 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
-    "nd_frontend": "github:nikolai4D/frontEndFramework",
+    "nd_frontend": "github:nikolai4D/frontEndFramework#v0.0.1-beta",
     "nodemon": "^2.0.20",
     "vite": "^4.0.0"
   },
   "description": "A starting point for Nikdev applications.",
   "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nikolai4D/Nikdev-Template-App.git"
-  },
   "keywords": [
     "spa",
     "nikdev",
