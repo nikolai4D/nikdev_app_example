@@ -8,7 +8,6 @@ export default async function usersTable(table) {
 
     for (let user of users) {
         const userData = extractUserData(user) // Extract the data from the user object
-        console.log("userData: " + JSON.stringify(userData, null, 2))
     }
 
     table.headers = ["name", "age", "country", "checklists"]
@@ -24,7 +23,6 @@ export default async function usersTable(table) {
 async function userTableClickHandler(event) {
 
     const coords = getCellCoords(event)
-    console.log(coords)
     if (coords[1] === 0) {
         this.sortPerHeader(coords[0])
     }
