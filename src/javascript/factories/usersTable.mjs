@@ -1,10 +1,10 @@
-import fetchUsers from "../actions/fetchUsers.mjs";
 import {extractUserData} from "../ETL/extractUserData.mjs";
 import {getCellCoords} from "nd_frontend/generics/helpers.mjs";
+import {getAllUsers} from "../actions/users.mjs";
 
 export default async function usersTable(table) {
 
-    const users = (await fetchUsers()).data.nodes // Action that fetches the users from the API
+    const users = await getAllUsers() // Action that fetches the users from the API
 
     for (let user of users) {
         const userData = extractUserData(user) // Extract the data from the user object
@@ -48,11 +48,7 @@ function setRows(data, table){
         const row = []
 
         for (let i of table.headers){
-            if(Array.isArray(userData[i])) {
-
-                row.push(userData[i].join(",<br>"))
-
-            }
+            if(Array.isArray(userData[i])) row.push(userData[i].join(",<br>"))
             else row.push(userData[i])
         }
 

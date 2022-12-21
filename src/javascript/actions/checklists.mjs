@@ -2,7 +2,7 @@ async function graphQLQuery(query) {
     {
         let response
         try {
-            response = await fetch(`localhost:3000/api/graphql`, {
+            response = await fetch(`api/graphql`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

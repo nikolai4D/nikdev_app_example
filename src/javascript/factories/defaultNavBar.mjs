@@ -1,9 +1,10 @@
 import {router} from "../index.mjs";
 import {NavBar} from "nd_frontend/generics/components/organisms/NavBar.mjs";
 
-export function f_NavBar() {
+export function defaultNavBar() {
 
     let routes = new Map([
+        ["Vehicles", "vehicles"],
         ["Login", "login"],
         ["Dashboard", "dashboard"],
         ["User", "user"]

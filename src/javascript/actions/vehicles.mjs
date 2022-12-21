@@ -1,5 +1,5 @@
 export async function getAllVehicles() {
-    const resp = await fetch("vehicles", {
+    const resp = await fetch("api/vehicles", {
         method: "GET"
     })
 

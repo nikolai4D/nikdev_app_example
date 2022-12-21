@@ -1,5 +1,5 @@
 import {getAllVehicles} from "../../actions/vehicles.mjs";
-import {f_NavBar} from "../../factories/f_NavBar.mjs";
+import {defaultNavBar} from "../../factories/defaultNavBar.mjs";
 import {router} from "../../index.mjs";
 import usersTable from "../../factories/usersTable.mjs";
 import {View} from "nd_frontend/core/View.mjs";
@@ -15,7 +15,7 @@ export function Dashboard() {
     this.title = "Dashboard"
 
     // These are the components that will be rendered in the view. Keeping a reference to them can be convenient but is not mandatory.
-    this.navBar = f_NavBar()
+    this.navBar = defaultNavBar()
     this.header = new Header(1,"Dashboard")
     this.usersTable = new Table()
     this.vehicleTable = new Table()

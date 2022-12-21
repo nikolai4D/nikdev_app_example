@@ -3,10 +3,12 @@ import {Dashboard} from "./frontend/views/Dashboard.mjs";
 import {User} from "./frontend/views/User.js";
 import {loggedInGuard} from "./frontend/guards/loggedInGuard.mjs";
 import {route, Router} from "nd_frontend/core/Router.mjs";
+import {Vehicles} from "./frontend/views/Vehicles.mjs";
 
 
 
 export const router = new Router([
+    route("vehicles", Vehicles),
     route("login", Login),
     route("dashboard", Dashboard/*, loggedInGuard*/),
     route("user", User)
