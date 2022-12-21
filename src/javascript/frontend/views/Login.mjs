@@ -14,7 +14,7 @@ export function Login() {
 
         if (state.credentials) {
             console.log("credentials: ", state.credentials)
-            await router.goTo("dashboard")
+            await router.goTo("checklists")
         }
         else alert("Wrong credentials")
 

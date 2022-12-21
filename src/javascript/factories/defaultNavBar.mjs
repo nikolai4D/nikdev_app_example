@@ -7,7 +7,7 @@ export function defaultNavBar() {
         ["Vehicles", "vehicles"],
         ["Login", "login"],
         ["Dashboard", "dashboard"],
-        ["User", "user"]
+        ["Checklists", "checklists"]
     ])
 
     return new NavBar(routes,router)

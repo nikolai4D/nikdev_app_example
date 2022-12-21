@@ -248,7 +248,7 @@ function Login() {
     await login(username, password);
     if (state.credentials) {
       console.log("credentials: ", state.credentials);
-      await router.goTo("dashboard");
+      await router.goTo("checklists");
     } else
       alert("Wrong credentials");
   }, "Username", "Password");
@@ -292,7 +292,7 @@ function defaultNavBar() {
     ["Vehicles", "vehicles"],
     ["Login", "login"],
     ["Dashboard", "dashboard"],
-    ["User", "user"]
+    ["Checklists", "checklists"]
   ]);
   return new NavBar(routes, router);
 }
@@ -302,14 +302,11 @@ function extractUserData(user) {
 }
 const getCellCoords = (event) => [event.target.cellIndex, event.target.parentElement.rowIndex];
 async function usersTable(table) {
-  const users = await getAllUsers();
-  for (let user of users) {
-    extractUserData(user);
-  }
+  const usersRaw = await getAllUsers();
   table.headers = ["name", "age", "country", "checklists"];
-  table.rows = setRows(users, table);
+  table.rows = setRows$2(usersRaw, table);
   table.clickHandler = userTableClickHandler;
-  table.data = users;
+  table.data = usersRaw;
   table.sortPerHeader = sortPerHeader;
   return table;
 }
@@ -318,7 +315,7 @@ async function userTableClickHandler(event) {
   if (coords[1] === 0) {
     this.sortPerHeader(coords[0]);
   }
-  this.rows = setRows(this.data, this);
+  this.rows = setRows$2(this.data, this);
   const oldTable = this.element;
   this.element = null;
   oldTable.replaceWith(this.getElement());
@@ -327,7 +324,7 @@ function sortPerHeader(x) {
   const clickedHeader = this.headers.splice(x, 1);
   this.headers.push(clickedHeader);
 }
-function setRows(data, table) {
+function setRows$2(data, table) {
   return data.map((user) => {
     const userData = extractUserData(user);
     const row = [];
@@ -398,16 +395,93 @@ function Dashboard() {
   this.template = new Default();
   this.template.components.push(this.navBar, this.header, this.usersTable, this.button);
 }
-function User() {
+async function getChecklistsRelatedToUser(username) {
+  const resp = await fetch("/api/checklists/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username })
+  });
+  return await resp.json();
+}
+function extractChecklistData(checklistRaw) {
+  return {
+    checklist: checklistRaw.title,
+    tasks: checklistRaw.relationships.map((relationship) => relationship.sourceNode.title)
+  };
+}
+async function checklistTable(table, user) {
+  const rawChecklists = await getChecklistsRelatedToUser(user), checklists = rawChecklists.map((checklist) => extractChecklistData(checklist));
+  console.log(checklists);
+  table.headers = ["checklist", "tasks"];
+  table.rows = setRows$1(checklists, table);
+  table.data = checklists;
+  return table;
+}
+function setRows$1(data, table) {
+  return data.map((checklist) => {
+    const row = [];
+    console.log(checklist);
+    for (let i of table.headers) {
+      if (Array.isArray(checklist[i]))
+        row.push(checklist[i].join(",<br>"));
+      else
+        row.push(checklist[i]);
+    }
+    return row;
+  });
+}
+function weekTable(table) {
+  const week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], tasks = ["task1", "task2", "task3", "task4", "task5", "task6", "task7"], note = ["red", void 0, "green", void 0, void 0, "purple", "pink"];
+  const data = week.map((day, i) => {
+    return {
+      day,
+      task: tasks[i],
+      note: note[i]
+    };
+  });
+  table.headers = ["week", "tasks", "note"];
+  table.rows = setRows(table, data);
+  table.data = table;
+  table.bindScript = function() {
+    this.element.querySelectorAll("[data-slot]").forEach((slot2) => {
+      const slotName = slot2.dataset.slot;
+      const inputField = new TextInput("text", slotName);
+      slot2.replaceWith(inputField.getElement());
+    });
+  };
+  return table;
+}
+function setRows(table, data) {
+  return data.map((schedule, i) => {
+    const row = [];
+    const note = schedule.note ?? slot(i + 1 + "-note");
+    row.push(schedule.day, schedule.task, note);
+    return row;
+  });
+}
+function Checklists() {
   View.call(this);
-  this.title = "User";
+  const username = state.credentials;
+  const capitName = username.charAt(0).toUpperCase() + username.slice(1);
+  console.log("username: ", capitName);
+  this.title = username + "'s Checklists";
   this.navBar = defaultNavBar();
-  this.header = new Header(1, "User");
+  this.header = new Header(1, capitName + "'s Checklists");
+  this.checklistHeader = new Header(2, "Checklists");
+  this.checklistsTable = new Table();
+  this.weekHeader = new Header(2, "Weeks");
+  this.weekTable = new Table();
   this.button = new Button("Go To Dashboard Page", async () => {
     await router.goTo("dashboard");
   });
+  this.loadData = async () => {
+    await checklistTable(this.checklistsTable, username);
+    await weekTable(this.weekTable);
+  };
   this.template = new Default();
-  this.template.components.push(this.navBar, this.header, this.button);
+  this.template.components.push(this.navBar, this.header, this.checklistHeader, this.checklistsTable, this.weekHeader, this.weekTable, this.button);
 }
 function Guard() {
   this.answers = [
@@ -549,8 +623,8 @@ function Vehicles() {
 const router = new Router([
   route("vehicles", Vehicles),
   route("login", Login),
-  route("dashboard", Dashboard, loggedInGuard),
-  route("user", User)
+  route("dashboard", Dashboard),
+  route("checklists", Checklists, loggedInGuard)
 ]);
 const path = window.location.pathname.slice(1);
 console.log("path: ", path);

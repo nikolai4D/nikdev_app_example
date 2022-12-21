@@ -4,17 +4,13 @@ import {getAllUsers} from "../actions/users.mjs";
 
 export default async function usersTable(table) {
 
-    const users = await getAllUsers() // Action that fetches the users from the API
-
-    for (let user of users) {
-        const userData = extractUserData(user) // Extract the data from the user object
-    }
+    const usersRaw = await getAllUsers() // Action that fetches the users from the API
 
     table.headers = ["name", "age", "country", "checklists"]
-    table.rows = setRows(users, table)
+    table.rows = setRows(usersRaw, table)
 
     table.clickHandler = userTableClickHandler
-    table.data = users
+    table.data = usersRaw
     table.sortPerHeader = sortPerHeader
 
     return table
