@@ -1,3 +1,8 @@
+/**
+ * flatten, trim and filter the user data obtained from the graphql request.
+ * @param user
+ * @returns {{checklists: *, country: *, name: *, age: *}}
+ */
 export function extractUserData(user){
     const   name = user.title,
             age = user.relationships.find(rel => rel.sourceNode.parentId === "co_c4e24d3c-42b1-49d9-b086-d816473c17a7").sourceNode.title,

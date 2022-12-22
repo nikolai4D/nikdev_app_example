@@ -243,15 +243,19 @@ async function getAllUsers() {
 }
 function Login() {
   View.call(this);
-  this.loginForm = new LoginForm(async () => {
-    const [username, password] = this.loginForm.getValues();
-    await login(username, password);
-    if (state.credentials) {
-      console.log("credentials: ", state.credentials);
-      await router.goTo("checklists");
-    } else
-      alert("Wrong credentials");
-  }, "Username", "Password");
+  this.loginForm = new LoginForm(
+    async () => {
+      const [username, password] = this.loginForm.getValues();
+      await login(username, password);
+      if (state.credentials) {
+        console.log("credentials: ", state.credentials);
+        await router.goTo("checklists");
+      } else
+        alert("Wrong credentials");
+    },
+    "Username",
+    "Password"
+  );
   this.template = new Default();
   this.template.components.push(this.loginForm);
 }
@@ -443,7 +447,7 @@ function weekTable(table) {
   });
   table.headers = ["week", "tasks", "note"];
   table.rows = setRows(table, data);
-  table.data = table;
+  table.data = data;
   table.bindScript = function() {
     this.element.querySelectorAll("[data-slot]").forEach((slot2) => {
       const slotName = slot2.dataset.slot;

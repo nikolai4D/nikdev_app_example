@@ -6,9 +6,10 @@ import {Default} from "nd_frontend/generics/components/templates/Default.mjs";
 import {login} from "../../actions/users.mjs";
 
 export function Login() {
-    View.call(this)
+    View.call(this) // Call the View constructor
 
-    this.loginForm = new LoginForm(async () => {
+    this.loginForm = new LoginForm(
+        async () => {
         const [username, password] = this.loginForm.getValues()
         await login(username, password)
 
@@ -18,8 +19,10 @@ export function Login() {
         }
         else alert("Wrong credentials")
 
-    },"Username","Password")
+    },
+        "Username",
+        "Password")
 
-    this.template = new Default()
-    this.template.components.push(this.loginForm)
+    this.template = new Default() // Use the Default template, it simply insert all its subcomponents one after the other.
+    this.template.components.push(this.loginForm) // Add the login form to the template
 }
