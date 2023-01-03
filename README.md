@@ -11,4 +11,17 @@ The stack is:
 - nd_frontend_framework -> nikdev frontend framework
 - more nikdev packages to come.
 
-Without the contechOS instance running alongside, you will be able to run the project and display the first view (Vehicles". Accessing the following views will require
+
+Without the contechOS instance running alongside, you will be able to run the project and display the first view (Vehicles". Accessing the following views will require to run the contechOS with a specific db folder that you can currently find //Todo -> find a way to share this folder.
+
+### Quick set up:
+
+##### Setting up the basics:
+
+- Clone this project.
+- rename the ```.env.example``` folder to ```.env```
+- Run the start npm command.
+- Open the browser and check the ```localhost:3001``` url
+- You see a page about vehicles -> Good.
+
+#### Setting up the external database:
