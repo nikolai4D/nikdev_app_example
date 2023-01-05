@@ -12,7 +12,7 @@ The stack is:
 - more nikdev packages to come.
 
 
-Without the contechOS instance running alongside, you will be able to run the project and display the first view (Vehicles". Accessing the following views will require to run the contechOS with a specific db folder that you can currently find //Todo -> find a way to share this folder.
+Without the contechOS instance running alongside, you will be able to run the project and display the first view ```localhost:3001/vehicles```. Accessing the following views will require to run the contechOS with a specific db folder that you can currently find //Todo -> find a way to share this folder.
 
 ### Quick set up:
 
