@@ -47,4 +47,4 @@ Without the contechOS instance running alongside, you will be able to run the pr
  - app.js is the top level router. Request received by the server are matched with its routes. It may send the orginal html file or call the api subrouter.
  - .env holds confidential data. Should never be committed or sent to the client.
  - index.html the basic html code that will be initially be sent to the client. It needs to be at the root of the project for vite.js to bundle it.
- - vite.config.js configuration for vite, the bundler tool. It needs to be at the root of the project for vite.js to cinsider it.
+ - vite.config.js configuration for vite, the bundler tool. It needs to be at the root of the project for vite.js to consider it.
