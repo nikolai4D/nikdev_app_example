@@ -16,7 +16,7 @@ Without the contechOS instance running alongside, you will be able to run the pr
 
 ### Quick set up:
 
-##### Setting up the basics:
+#### Setting up the basics:
 
 - Clone this project.
 - rename the ```.env.example``` folder to ```.env```
@@ -25,3 +25,10 @@ Without the contechOS instance running alongside, you will be able to run the pr
 - You see a page about vehicles -> Good.
 
 #### Setting up the external database:
+
+ - Set up a contechOS instance (repo: https://github.com/nikolai4D/ContechOS.git)
+ - Along side the root project, copy the following db folder: // TOBEPROVIDEDSOON.
+ - run the instance with ```npm run start```
+ 
+ - Go to ```localhost:3001/login```, enter the credentials ```john``` ```123```.
+ - You are redirected to Hogn checklist page -> good.
