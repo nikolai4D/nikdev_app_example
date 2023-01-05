@@ -48,3 +48,8 @@ Without the contechOS instance running alongside, you will be able to run the pr
  - .env holds confidential data. Should never be committed or sent to the client.
  - index.html the basic html code that will be initially be sent to the client. It needs to be at the root of the project for vite.js to bundle it.
  - vite.config.js configuration for vite, the bundler tool. It needs to be at the root of the project for vite.js to consider it.
+
+## Bundler:
+
+Vite is the current bundler. It is build upon rollup.
+Run the npm ```watch``` command to start looking for changes and automatically bundle sources.
