@@ -31,4 +31,4 @@ Without the contechOS instance running alongside, you will be able to run the pr
  - run the instance with ```npm run start```
  
  - Go to ```localhost:3001/login```, enter the credentials ```john``` ```123```.
- - You are redirected to Hogn checklist page -> good.
+ - You are redirected to John checklist page -> good.
